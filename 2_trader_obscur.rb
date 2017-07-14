@@ -16,8 +16,6 @@ def get_prices_now
 	xpath_price = '//td/a[@class="price"]'
 	prices = page.xpath(xpath_price)
 
-	puts prices[1].text
-
 	i = 0
 	currencies.each do |currency|
 		prices_hash[":#{currency.text}"]=prices[i].text
@@ -27,5 +25,21 @@ def get_prices_now
 	return prices_hash
 end
 
-puts get_prices_now()
+
+def prices_acquisition(duration=60,frequency)
+	price_table=[]
+
+	n = duration / frequency
+	n = n.floor
+
+	n.times do
+		price_table << get_prices_now
+		sleep(frequency)
+	end
+
+	return price_table
+
+end
+
+puts prices_acquisition(50)
 
