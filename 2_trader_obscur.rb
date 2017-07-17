@@ -18,7 +18,7 @@ def get_prices_now
 
 	i = 0
 	currencies.each do |currency|
-		prices_hash[":#{currency.text}"]=prices[i].text
+		prices_hash[":#{currency.text}"]=prices[i].text.slice(1..-1).to_f
 		i+=1
 	end
 
